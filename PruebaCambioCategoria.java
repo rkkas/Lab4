@@ -5,7 +5,6 @@ public class PruebaCambioCategoria {
         long timestampInicio = System.currentTimeMillis() / 1000L;
         List<Paciente> pacientes = GeneradorPacientes.generarPacientes(50, timestampInicio);
 
-        // Seleccionamos un paciente de categoría 3 para la prueba
         Paciente paciente = pacientes.get(10);
         paciente.setCategoria(3);
 
@@ -18,7 +17,6 @@ public class PruebaCambioCategoria {
                 paciente.getNombreCompleto(),
                 paciente.getCategoria());
 
-        // Realizamos el cambio de categoría
         hospital.reasignarCategoria(paciente.getId(), 1);
 
         System.out.println("\nDespués del cambio de categoría:");
