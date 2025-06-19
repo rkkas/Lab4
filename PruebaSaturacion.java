@@ -7,18 +7,14 @@ public class PruebaSaturacion {
     public static void main(String[] args) throws IOException {
         long timestampInicio = System.currentTimeMillis() / 1000L;
 
-        // Generar 200 pacientes para la simulación
         List<Paciente> pacientes = GeneradorPacientes.generarPacientes(200, timestampInicio);
         GeneradorPacientes.guardarPacientesEnArchivo(pacientes, "Pacientes_24h.txt");
 
-        // Crear el hospital y simulador
         Hospital hospital = new Hospital();
         SimuladorUrgencia simulador = new SimuladorUrgencia(hospital, pacientes, timestampInicio);
 
-        // Ejecutar la simulación
         simulador.simular();
 
-        // Mostrar resultados
         System.out.println("----- PRUEBA DE SATURACIÓN -----");
         System.out.println("Total de pacientes atendidos: " + simulador.getTotalAtendidos());
 
