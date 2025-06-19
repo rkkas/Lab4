@@ -30,32 +30,26 @@ public void simular() {
     int indexPaciente = 0;
     int pacientesNuevos = 0;
     for (long minuto = 0; minuto < tiempoSimulacion; minuto++) {
-        // Generar pacientes cada 10 minutos
         if (minuto % 10 == 0 && indexPaciente < pacientes.size()) {
             hospital.registrarPaciente(pacientes.get(indexPaciente));
             pacientesNuevos++;
             indexPaciente++;
         }
 
-        // 💡 Nuevo: Atender pacientes de categoría 1 al instante
         atenderPacientesCategoria1Inmediato(minuto);
 
-        // Atender pacientes que excedieron su tiempo de espera
         atenderPacientesExcedidos(minuto);
 
-        // Atender regularmente cada 15 minutos
         if (minuto % 15 == 0) {
             hospital.atenderSiguienteConEstadisticas(minuto, this);
         }
 
-        // Atender adicionalmente cuando hay 3 nuevos pacientes
         if (pacientesNuevos >= 3) {
             hospital.atenderSiguienteConEstadisticas(minuto, this);
             hospital.atenderSiguienteConEstadisticas(minuto, this);
             pacientesNuevos = 0;
         }
 
-        // Atender pacientes de categoría baja cada hora
         if (minuto % 60 == 0) {
             hospital.atenderPacienteCategoriaBaja(minuto, this);
         }
